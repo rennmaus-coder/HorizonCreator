@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/HorizonCreator/.vs/HorizonCreator/v17
+/HorizonCreator/bin
+/HorizonCreator/obj
+*.json
+/packages
