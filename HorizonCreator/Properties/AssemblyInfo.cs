@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 // The url to the license
 [assembly: AssemblyMetadata("LicenseURL", "https://www.mozilla.org/en-US/MPL/2.0/")]
 // The repository where your pluggin is hosted
-[assembly: AssemblyMetadata("Repository", "https://bitbucket.org/Isbeorn/nina.plugin.template/")]
+[assembly: AssemblyMetadata("Repository", "https://github.com/rennmaus-coder/HorizonCreator")]
 
 //[Optional] Common tags that quickly describe your plugin
 [assembly: AssemblyMetadata("Tags", "Horizon,Dock")]
@@ -42,15 +42,3 @@ using System.Runtime.InteropServices;
 
 
 To see your obstruction, I recommend making a looping exposure / live view or using an eyepiece")]
-
-
-// Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-// [Unused]
-[assembly: AssemblyConfiguration("")]
-// [Unused]
-[assembly: AssemblyTrademark("")]
-// [Unused]
-[assembly: AssemblyCulture("")]

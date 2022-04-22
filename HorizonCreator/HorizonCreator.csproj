@@ -269,6 +269,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Astrometry\EdgeDetection.cs" />
     <Compile Include="Dock\CreatorDock.xaml.cs">
       <DependentUpon>CreatorDock.xaml</DependentUpon>
     </Compile>
