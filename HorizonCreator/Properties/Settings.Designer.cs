@@ -37,13 +37,49 @@ namespace HorizonCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("This is a notification")]
-        public string DefaultNotificationMessage {
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int HorizontalResolution {
             get {
-                return ((string)(this["DefaultNotificationMessage"]));
+                return ((int)(this["HorizontalResolution"]));
             }
             set {
-                this["DefaultNotificationMessage"] = value;
+                this["HorizontalResolution"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int StartAltitude {
+            get {
+                return ((int)(this["StartAltitude"]));
+            }
+            set {
+                this["StartAltitude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsSouth {
+            get {
+                return ((bool)(this["IsSouth"]));
+            }
+            set {
+                this["IsSouth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int VerticalResolution {
+            get {
+                return ((int)(this["VerticalResolution"]));
+            }
+            set {
+                this["VerticalResolution"] = value;
             }
         }
     }

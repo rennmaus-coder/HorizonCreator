@@ -9,9 +9,17 @@
     x:Class="HorizonCreator.Dock.CreatorDock"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:alt="clr-namespace:NINA.WPF.Base.View;assembly=NINA.WPF.Base">
+    xmlns:ctrl="clr-namespace:NINACustomControlLibrary;assembly=NINACustomControlLibrary"
+    xmlns:wpfutil="clr-namespace:NINA.WPF.Base.Utility;assembly=NINA.WPF.Base">
 
     <DataTemplate x:Key="HorizonCreator.Dock.HorizonCreatorDock_Dockable">
+        <DataTemplate.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <wpfutil:SharedResourceDictionary Source="/NINA.WPF.Base;component/Resources/StaticResources/SVGDictionary.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </DataTemplate.Resources>
         <StackPanel Margin="5" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <Button
@@ -38,6 +46,12 @@
                     Margin="5"
                     Command="{Binding Minus}"
                     Content="&lt;-" />
+                <Button
+                    Width="80"
+                    Height="40"
+                    Margin="5"
+                    Command="{Binding Test}"
+                    Content="Test" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
                 <TextBox
@@ -46,6 +60,75 @@
                     Margin="5,0,0,0"
                     Text="{Binding Points}"
                     VerticalScrollBarVisibility="Auto" />
+                <ctrl:CancellableButton
+                    Height="50"
+                    Margin="5,5,0,5"
+                    HorizontalAlignment="Stretch"
+                    ButtonImage="{StaticResource PlaySVG}"
+                    CancelButtonImage="{StaticResource StopSVG}"
+                    CancelCommand="{Binding StopAutomatedHorizon}"
+                    Command="{Binding AutomatedHorizon}" />
+                <!--
+                    PauseButtonImage="{StaticResource PauseSVG}"
+                    PauseCommand="{Binding PauseAutomatedHorizon}"
+                    ResumeButtonImage="{StaticResource ArrowLeftSVG}"
+                    ResumeCommand="{Binding ResumeAutomatedHorizon}"
+                -->
+                <Grid Margin="0,10,0,0" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="100"
+                        Height="100"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Command="{Binding AltUp}"
+                        Content="Altitude up" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Width="100"
+                        Height="100"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Command="{Binding AzLeft}"
+                        Content="Azimuth left" />
+                    <ctrl:UnitTextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="80"
+                        Text="{Binding StepSize}"
+                        ToolTip="Stepsize (degree)"
+                        Unit="°" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Width="100"
+                        Height="100"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Command="{Binding AzRight}"
+                        Content="Azimuth right" />
+                    <Button
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Width="100"
+                        Height="100"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding AltDown}"
+                        Content="Altitude down" />
+                </Grid>
             </StackPanel>
         </StackPanel>
     </DataTemplate>
