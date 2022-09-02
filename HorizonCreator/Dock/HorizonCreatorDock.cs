@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace HorizonCreator.Dock
 {
@@ -51,10 +52,30 @@ namespace HorizonCreator.Dock
             }
         }
 
+        private double altitudeIncrement;
+        public double AltitudeIncrement {
+            get => altitudeIncrement;
+            set {
+                altitudeIncrement = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double azimuthIncrement;
+        public double AzimuthIncrement {
+            get => azimuthIncrement;
+            set {
+                azimuthIncrement = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public RelayCommand AddPoint { get; set; }
         public RelayCommand Save { get; set; }
         public RelayCommand Clear { get; set; }
         public RelayCommand Minus { get; set; }
+
+        public IAsyncCommand MoveAltAzCommand { get; }
         
         [ImportingConstructor]
         public HorizonCreatorDock(IProfileService profileService, ITelescopeMediator telescope) : base(profileService)
@@ -62,6 +83,10 @@ namespace HorizonCreator.Dock
             Title = "Horizon Creator";
             this.pService = profileService;
             this.telescope = telescope;
+
+            AltitudeIncrement = 5;
+            AzimuthIncrement = 5;
+
             points = new List<Coordinate>();
 
             AddPoint = new RelayCommand(_ =>
@@ -110,6 +135,36 @@ namespace HorizonCreator.Dock
                     RaisePropertyChanged(nameof(Points));
                 }
             });
+
+            MoveAltAzCommand = new AsyncCommand<bool>(MoveAltAz, (object o) => telescope.GetInfo().Connected);
+        }
+
+        private async Task<bool> MoveAltAz(object arg) {
+            if(arg is string s) {
+                var latitude = Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude);
+                var longitude = Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude);
+                var info = telescope.GetInfo();
+                var altitude = Angle.ByDegree(info.Altitude);
+                var azimuth = Angle.ByDegree(info.Azimuth);
+                switch(s) {
+                    case "N":
+                        altitude += Angle.ByDegree(AltitudeIncrement);
+                        break;
+                    case "S":
+                        altitude -= Angle.ByDegree(AltitudeIncrement);
+                        break;
+                    case "E":
+                        azimuth += Angle.ByDegree(AzimuthIncrement);
+                        break;
+                    case "W":
+                        azimuth -= Angle.ByDegree(AzimuthIncrement);
+                        break;
+                }
+
+                var topo = new TopocentricCoordinates(azimuth, altitude, latitude, longitude);
+                await telescope.SlewToCoordinatesAsync(topo, default);
+            }
+            return true;
         }
     }
 
