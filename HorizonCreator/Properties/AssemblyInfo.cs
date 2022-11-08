@@ -41,7 +41,9 @@ using System.Runtime.InteropServices;
 3. Click 'Save' and choose the desired location
 
 
-To see your obstruction, I recommend making a looping exposure / live view or using an eyepiece")]
+To see your obstruction, I recommend making a looping exposure / live view or using an eyepiece
+
+Thanks to Isbeorn for helping me with the development of this plugin!")]
 
 
 // Setting ComVisible to false makes the types in this assembly not visible
