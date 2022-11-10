@@ -11,150 +11,224 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:alt="clr-namespace:NINA.WPF.Base.View;assembly=NINA.WPF.Base"
     xmlns:ninactrl="clr-namespace:NINA.CustomControlLibrary;assembly=NINA.CustomControlLibrary"
-    xmlns:ns="clr-namespace:NINA.Core.Locale;assembly=NINA.Core">
+    xmlns:ns="clr-namespace:NINA.Core.Locale;assembly=NINA.Core"
+    xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Contrib.Wpf">
 
     <DataTemplate x:Key="HorizonCreator.Dock.HorizonCreatorDock_Dockable">
-        <WrapPanel Margin="5" Orientation="Horizontal">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Width="80"
-                        Height="40"
-                        Margin="5"
-                        Command="{Binding AddPoint}"
-                        Content="Add Point" />
-                    <Button
-                        Width="80"
-                        Height="40"
-                        Margin="5"
-                        Command="{Binding Save}"
-                        Content="Save" />
-                    <Button
-                        Width="80"
-                        Height="40"
-                        Margin="5"
-                        Command="{Binding Clear}"
-                        Content="Clear" />
-                    <Button
-                        Width="80"
-                        Height="40"
-                        Margin="5"
-                        Command="{Binding Minus}"
-                        Content="&lt;-" />
-                </StackPanel>
-                <StackPanel
-                    Grid.Row="1"
-                    HorizontalAlignment="Left"
-                    Orientation="Vertical">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Width="40"
+                            Height="25"
+                            Margin="5"
+                            Command="{Binding AddPoint}"
+                            Content="Add" />
+                        <Button
+                            Width="40"
+                            Height="25"
+                            Margin="5"
+                            Command="{Binding Save}"
+                            Content="Save" />
+                        <Button
+                            Width="40"
+                            Height="25"
+                            Margin="5"
+                            Command="{Binding Clear}"
+                            Content="Clear" />
+                        <Button
+                            Width="40"
+                            Height="25"
+                            Margin="5"
+                            Command="{Binding Minus}"
+                            Content="&lt;-" />
+                    </StackPanel>
                     <TextBox
-                        Width="350"
-                        Height="500"
+                        Grid.Row="1"
+                        MinWidth="150"
+                        MinHeight="250"
                         Margin="5,0,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         Text="{Binding Points}"
                         VerticalScrollBarVisibility="Auto" />
-                </StackPanel>
-            </Grid>
-
-
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock VerticalAlignment="Center" Text="Azimuth Stepsize" />
-                    <ninactrl:UnitTextBox
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        MinWidth="40"
-                        Margin="5,0,0,0"
-                        Text="{Binding AzimuthIncrement}"
-                        Unit="°" />
-
-                    <TextBlock
-                        Grid.Row="1"
-                        VerticalAlignment="Center"
-                        Text="Altitude Stepsize" />
-                    <ninactrl:UnitTextBox
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        MinWidth="40"
-                        Margin="5,0,0,0"
-                        Text="{Binding AltitudeIncrement}"
-                        Unit="°" />
-
                 </Grid>
 
-                <Grid
-                    Grid.Row="1"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Width="40"
-                        Height="40"
-                        Command="{Binding MoveAltAzCommand}"
-                        CommandParameter="N">
-                        <TextBlock Text="↑" />
-                    </Button>
-                    <Button
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock VerticalAlignment="Center" Text="Azimuth Stepsize" />
+                        <ninactrl:UnitTextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            MinWidth="40"
+                            Margin="5,0,0,0"
+                            Text="{Binding AzimuthIncrement}"
+                            Unit="°" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            VerticalAlignment="Center"
+                            Text="Altitude Stepsize" />
+                        <ninactrl:UnitTextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            MinWidth="40"
+                            Margin="5,0,0,0"
+                            Text="{Binding AltitudeIncrement}"
+                            Unit="°" />
+
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="1"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding MoveAltAzCommand}"
+                            CommandParameter="N">
+                            <TextBlock Text="↑" />
+                        </Button>
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding MoveAltAzCommand}"
+                            CommandParameter="S">
+                            <TextBlock Text="↓" />
+                        </Button>
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding MoveAltAzCommand}"
+                            CommandParameter="E">
+                            <TextBlock Text="→" />
+                        </Button>
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Width="40"
+                            Height="40"
+                            Command="{Binding MoveAltAzCommand}"
+                            CommandParameter="W">
+                            <TextBlock Text="←" />
+                        </Button>
+                    </Grid>
+
+                    <oxy:Plot
                         Grid.Row="2"
-                        Grid.Column="1"
-                        Width="40"
-                        Height="40"
-                        Command="{Binding MoveAltAzCommand}"
-                        CommandParameter="S">
-                        <TextBlock Text="↓" />
-                    </Button>
-                    <Button
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Width="40"
-                        Height="40"
-                        Command="{Binding MoveAltAzCommand}"
-                        CommandParameter="E">
-                        <TextBlock Text="→" />
-                    </Button>
-                    <Button
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Width="40"
-                        Height="40"
-                        Command="{Binding MoveAltAzCommand}"
-                        CommandParameter="W">
-                        <TextBlock Text="←" />
-                    </Button>
+                        MinWidth="200"
+                        MinHeight="200"
+                        Background="{StaticResource BackgroundBrush}"
+                        PlotAreaBackground="{StaticResource BackgroundBrush}"
+                        PlotAreaBorderColor="{Binding Path=Color, Source={StaticResource BorderBrush}}">
+                        <oxy:Plot.Axes>
+                            <!--  Currently the center is Minimum - so the axis values and datapoints need to be inverted  -->
+                            <oxy:MagnitudeAxis
+                                Key="AltitudeAxis"
+                                AxislineColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}}"
+                                IsPanEnabled="False"
+                                IsZoomEnabled="False"
+                                MajorGridlineColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}, Converter={StaticResource SetAlphaToColorConverter}, ConverterParameter=60}"
+                                MajorStep="10"
+                                Maximum="00"
+                                Minimum="-90"
+                                MinorGridlineColor="Transparent"
+                                TextColor="Transparent" />
+                            <oxy:AngleAxis
+                                Key="AzimuthAxis"
+                                AxislineColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}}"
+                                EndAngle="90"
+                                IsPanEnabled="False"
+                                IsZoomEnabled="False"
+                                MajorGridlineColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}, Converter={StaticResource SetAlphaToColorConverter}, ConverterParameter=60}"
+                                MajorStep="45"
+                                Maximum="360"
+                                Minimum="0"
+                                MinorGridlineColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}, Converter={StaticResource SetAlphaToColorConverter}, ConverterParameter=20}"
+                                MinorStep="22.5"
+                                StartAngle="450"
+                                TextColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}}"
+                                TicklineColor="{Binding Path=Color, Source={StaticResource PrimaryBrush}, Converter={StaticResource SetAlphaToColorConverter}, ConverterParameter=60}" />
+                        </oxy:Plot.Axes>
+                        <oxy:Plot.Series>
+                            <oxy:AreaSeries
+                                DataFieldX="X"
+                                DataFieldX2="X2"
+                                DataFieldY="Y"
+                                DataFieldY2="Y"
+                                ItemsSource="{Binding Horizon}"
+                                XAxisKey="AltitudeAxis"
+                                YAxisKey="AzimuthAxis"
+                                Color="{Binding Path=Color, Source={StaticResource ButtonBackgroundBrush}}" />
+                            <oxy:LineSeries
+                                DataFieldX="X"
+                                DataFieldY="Y"
+                                ItemsSource="{Binding ExplicitHorizonPoints}"
+                                MarkerFill="{Binding Path=Color, Source={StaticResource PrimaryBrush}}"
+                                MarkerType="Square"
+                                StrokeThickness="0"
+                                XAxisKey="AltitudeAxis"
+                                YAxisKey="AzimuthAxis" />
+                        </oxy:Plot.Series>
+                        <oxy:Plot.Annotations>
+                            <oxy:PointAnnotation
+                                Fill="{Binding Path=Color, Source={StaticResource PrimaryBrush}}"
+                                Shape="Cross"
+                                Stroke="{Binding Path=Color, Source={StaticResource PrimaryBrush}}"
+                                StrokeThickness="2"
+                                X="{Binding TelescopePosition.X}"
+                                XAxisKey="AltitudeAxis"
+                                Y="{Binding TelescopePosition.Y}"
+                                YAxisKey="AzimuthAxis" />
+                        </oxy:Plot.Annotations>
+                    </oxy:Plot>
                 </Grid>
-
             </Grid>
-        </WrapPanel>
+        </ScrollViewer>
     </DataTemplate>
 
 </ResourceDictionary>
