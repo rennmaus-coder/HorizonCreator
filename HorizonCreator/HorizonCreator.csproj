@@ -8,6 +8,9 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="manifest.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="ReachFramework" />
     <Reference Update="System">
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
